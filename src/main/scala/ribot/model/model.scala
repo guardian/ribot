@@ -1,13 +1,8 @@
 package ribot.model
 
-import scala.concurrent.duration.Duration
-import java.util.concurrent.TimeUnit
-import org.joda.time.DateTime
+import org.joda.time.{Duration, DateTime}
 
-case class InstanceType(instanceClass: String, instanceSize: String) {
-  val name = s"$instanceClass.$instanceSize"
-  def sizeNormalistionFactor = InstanceSizeNormalisationFactor(instanceSize)
-}
+
 
 object InstanceSizeNormalisationFactor {
 
@@ -67,21 +62,23 @@ case class Reservation
 }
 
 
-// A key question here: is this the total number of instance hours assigned to this class?
-// Or does it represent an individual instance starting?
-// Actually the latter isn't that interesting. What I think you're looking for is the
-// *average* number of instances running over the last month.
-// SO working concept: this represents the *total* instance hours for a type/az/class over the
-// last month
+
 case class Usage
 (
   instanceType: InstanceType,
   az: String,
   networkClass: NetworkClass,
-  durationHours: Int
-) {
-  def duration = Duration(durationHours, TimeUnit.HOURS)
-  def durationDays = duration.toDays
+  startDate: DateTime,
+  endDate: DateTime,
+  quantity: Int,
 
-  def averageUsagePerDay = durationDays / 30
+  // and these bits for info only
+  wasReserved: Boolean,
+  hourlyCost: BigDecimal
+
+) {
+  def durationHours = new Duration(startDate, endDate).getStandardHours
+  require(durationHours == 1, s"durationHours was $durationHours, expected 1")
+
+  def region = az dropRight 1
 }

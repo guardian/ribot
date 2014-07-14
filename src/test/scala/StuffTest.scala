@@ -57,8 +57,6 @@ class StuffTest extends FlatSpec with Matchers {
     val dateB = new DateTime(2014, 2, 11, 11, 15, 44, 30)
     val dateC = new DateTime(2014, 2, 15, 11, 15, 22, 55)
 
-    import InstanceTypes._
-
     val sampleReservations = List(
       Reservation(m3.xlarge, az = "eu-west-1a", networkClass = Classic, numInstances = 2, dateA),
       Reservation(m3.xlarge, az = "eu-west-1b", networkClass = Classic, numInstances = 2, dateB),
