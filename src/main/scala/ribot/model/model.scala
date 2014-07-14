@@ -1,5 +1,6 @@
 package ribot.model
 
+import com.amazonaws.services.ec2.model.ReservedInstances
 import org.joda.time.{Duration, DateTime}
 
 
@@ -7,6 +8,7 @@ import org.joda.time.{Duration, DateTime}
 object InstanceSizeNormalisationFactor {
 
   // this list taken from http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modification-instancemove.html
+  // TODO: micro is now 0.5 becuase of t2's!
   private val instanceSizeToFactor = Map(
     "small" -> 1,
     "medium" -> 2,
@@ -15,9 +17,9 @@ object InstanceSizeNormalisationFactor {
     "2xlarge" -> 16,
     "4xlarge" -> 32,
     "8xlarge" -> 64
-  )
+  ).withDefaultValue(0)
 
-  def apply(instanceSize: String): Option[Int] = instanceSizeToFactor.get(instanceSize)
+  def apply(instanceSize: String): Int = instanceSizeToFactor(instanceSize)
 
 
   def combosFor(totalFactor: Int): Set[Set[String]] = {
@@ -44,12 +46,16 @@ sealed trait NetworkClass
 case object Classic extends NetworkClass
 case object VPC extends NetworkClass
 
-
-case class Reservation
+case class ReservationCriteria
 (
   instanceType: InstanceType,
   az: String,
-  networkClass: NetworkClass,
+  networkClass: NetworkClass
+)
+
+case class Reservation
+(
+  criteria: ReservationCriteria,
   numInstances: Long,
   endDate: DateTime
 ) {
@@ -61,24 +67,24 @@ case class Reservation
   require(numInstances > 0)
 }
 
+object Reservation {
+  def fromAws(r: ReservedInstances): List[Reservation] = {
+    if (r.getState != "active") Nil
+    else {
+      val criteria = ReservationCriteria(
+        InstanceType.fromString(r.getInstanceType),
+        r.getAvailabilityZone,
+        Classic
+      )
 
-
-case class Usage
-(
-  instanceType: InstanceType,
-  az: String,
-  networkClass: NetworkClass,
-  startDate: DateTime,
-  endDate: DateTime,
-  quantity: Int,
-
-  // and these bits for info only
-  wasReserved: Boolean,
-  hourlyCost: BigDecimal
-
-) {
-  def durationHours = new Duration(startDate, endDate).getStandardHours
-  require(durationHours == 1, s"durationHours was $durationHours, expected 1")
-
-  def region = az dropRight 1
+      List(Reservation(
+        criteria,
+        r.getInstanceCount.toLong,
+        new DateTime(r.getEnd)
+      )
+      )
+    }
+  }
 }
+
+

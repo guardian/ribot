@@ -97,7 +97,7 @@ class BillingCsvRow(values: Map[String, String], lineNumber: Long) {
     isEc2InstanceUsage &&
     // for heavy reserved instances, you get both the actual usage (for one hour)
     // and a overall monthly "unused" cost. The unused cost doesn't have an availability zone.
-    availabilityZone == null
+    availabilityZone != null
 
   def asUsage(networkClass: NetworkClass) = Usage(
     instanceType = instanceType,
