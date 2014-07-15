@@ -2,24 +2,26 @@ package ribot
 
 import java.io.File
 
-import org.joda.time.{DateTimeZone, LocalTime, LocalDate}
+import org.joda.time.{DateTime, DateTimeZone, LocalTime, LocalDate}
 import ribot.billing.BillingCsvReader
 import ribot.model.{UsagesByRegion, Classic}
 
-object BillingCsvMain extends App {
+object BillingCsvMain /* extends App */ {
 
   println("hi dude!")
 
-  val filename = "/Users/gtackley/billing/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-07.csv.zip"
+  //val filename = "/Users/gtackley/billing/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-07.csv.zip"
+  val filename = "/Users/gtackley/billing/smaller.csv.zip"
 
-  val yesterday = new LocalDate(2014, 7, 14).minusDays(1)
-  val yesterdayAtEightPm = yesterday.toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
+//  val yesterday = new LocalDate().minusDays(1)
+//  val yesterdayAtEightPm = yesterday.toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
+  val hardcodedDateTime = new DateTime(2014, 7, 13, 8, 0, DateTimeZone.UTC)
 
   val usages = BillingCsvReader
     .parseZip(new File(filename))
     .filter(_.isEc2InstanceUsage)
     .filter(_.availabilityZone != null)
-    .filter(_.usageStartDate == yesterdayAtEightPm)
+    .filter(_.usageStartDate == hardcodedDateTime)
     // TODO: need to figure out VPS vs Classic
     .map(_.asUsage(Classic))
     .groupBy(_.region)

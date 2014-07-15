@@ -22,22 +22,23 @@ object InstanceSizeNormalisationFactor {
   def apply(instanceSize: String): Int = instanceSizeToFactor(instanceSize)
 
 
-  def combosFor(totalFactor: Int): Set[Set[String]] = {
-    if (totalFactor == 0) Set.empty
-    else {
-      // all the different ways that the number can be divided up
-      // start with the biggest size factor that doesn't exceed total
-      // and recurively add all the remaining
-      val x = for ((sizeName, size) <- instanceSizeToFactor if size <= totalFactor) yield {
-        println(s"totalFactor = $totalFactor; trying $sizeName ($size)")
-        Set(sizeName)
+  def combosFor(totalFactor: Int): Stream[List[String]] = {
+
+    def traverse(acc: List[String], remaining: Int): Stream[List[String]] = {
+      if (remaining == 0) {
+        if (acc.isEmpty) Stream.empty else Stream(acc)
       }
-
-      println("x = " + x)
-
-
-      Set.empty
+      else if (remaining < 0) Stream.empty
+      else {
+        instanceSizeToFactor.toStream
+          .filter { case (_, size) => size <= remaining }
+          .flatMap { case (sizeName, size) =>
+            traverse(sizeName :: acc, remaining - size)
+          }
+      }
     }
+
+    traverse(Nil, totalFactor)
   }
 }
 
@@ -46,25 +47,20 @@ sealed trait NetworkClass
 case object Classic extends NetworkClass
 case object VPC extends NetworkClass
 
-case class ReservationCriteria
-(
-  instanceType: InstanceType,
-  az: String,
-  networkClass: NetworkClass
-)
+
 
 case class Reservation
 (
   criteria: ReservationCriteria,
-  numInstances: Long,
-  endDate: DateTime
+  endDate: DateTime,
+  reservationId: String
 ) {
 
   // you can merge reservations where the hour is the same, even if the seconds differ
   // i.e. where this roundedEndDate is the same
   def roundedEndDate = endDate.withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0)
 
-  require(numInstances > 0)
+  def points = criteria.instanceType.sizeNormalistionFactor
 }
 
 object Reservation {
@@ -74,13 +70,14 @@ object Reservation {
       val criteria = ReservationCriteria(
         InstanceType.fromString(r.getInstanceType),
         r.getAvailabilityZone,
-        Classic
+        Classic,
+        r.getInstanceCount.toInt
       )
 
       List(Reservation(
         criteria,
-        r.getInstanceCount.toLong,
-        new DateTime(r.getEnd)
+        new DateTime(r.getEnd),
+        r.getReservedInstancesId
       )
       )
     }

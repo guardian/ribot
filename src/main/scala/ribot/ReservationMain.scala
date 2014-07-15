@@ -8,7 +8,7 @@ import ribot.model.Reservation
 
 import scala.collection.convert.decorateAll._
 
-object ReservationMain extends App {
+object ReservationMain /*extends App*/ {
   println("Getting reservations")
 
   val regions = List(Regions.US_WEST_1, Regions.EU_WEST_1, Regions.US_WEST_1) map Region.getRegion
@@ -27,10 +27,13 @@ object ReservationMain extends App {
       .groupBy(_.roundedEndDate)
 
     for ((dt, res) <- resGroups) {
-      println(s"  End date: ${dt}")
+      println(s"  End date: $dt")
 
       for ((instanceClass, rrr) <- res.groupBy(_.criteria.instanceType.instanceClass).toList.sortBy(_._1)) {
-        println(s"      class $instanceClass: ${rrr.map(r => r.criteria.instanceType.sizeNormalistionFactor * r.numInstances).sum}")
+        println(s"      class $instanceClass:")
+        rrr.foreach(r => println(s"          $r"))
+
+         // ${rrr.map(r => r.criteria.instanceType.sizeNormalistionFactor * r.numInstances).sum}")
       }
     }
 

@@ -1,7 +1,7 @@
 import org.joda.time.DateTime
 import ribot.model._
 import org.scalatest._
-import ribot.Ribot
+import ribot.RibotMain
 
 
 class StuffTest extends FlatSpec with Matchers {
@@ -57,25 +57,38 @@ class StuffTest extends FlatSpec with Matchers {
     val dateB = new DateTime(2014, 2, 11, 11, 15, 44, 30)
     val dateC = new DateTime(2014, 2, 15, 11, 15, 22, 55)
 
+    def resrv(az: String, numInstances: Int, endDate: DateTime) = Reservation(
+      ReservationCriteria(InstanceType.fromString("m3.xlarge"), az = az, networkClass = Classic),
+      numInstances = numInstances,
+      endDate = endDate
+    )
     val sampleReservations = List(
-      Reservation(m3.xlarge, az = "eu-west-1a", networkClass = Classic, numInstances = 2, dateA),
-      Reservation(m3.xlarge, az = "eu-west-1b", networkClass = Classic, numInstances = 2, dateB),
-      Reservation(m3.xlarge, az = "eu-west-1c", networkClass = Classic, numInstances = 2, dateC)
+      resrv(az = "eu-west-1a", numInstances = 2, dateA),
+      resrv(az = "eu-west-1b", numInstances = 2, dateB),
+      resrv(az = "eu-west-1c", numInstances = 2, dateC)
     )
 
     val grouped = sampleReservations
-      .groupBy(r => (r.instanceType.instanceClass, r.roundedEndDate))
+      .groupBy(r => (r.criteria.instanceType.instanceClass, r.roundedEndDate))
 
     for (reservations <- grouped.values) {
-      println("Avilable for reorg: class " + reservations.head.instanceType.instanceClass)
-      println("sum of scaling size = " + reservations.map(_.instanceType.sizeNormalistionFactor.get).sum)
+      println("Avilable for reorg: class " + reservations.head.criteria.instanceType.instanceClass)
+      println("sum of scaling size = " + reservations.map(_.criteria.instanceType.sizeNormalistionFactor).sum)
     }
   }
 
   "Size normalizer" should "be able to build possible combos" in {
-    InstanceSizeNormalisationFactor.combosFor(0) shouldBe Set.empty
-    InstanceSizeNormalisationFactor.combosFor(1) shouldBe Set(Set("small"))
-    InstanceSizeNormalisationFactor.combosFor(2) shouldBe Set(Set("small", "small"), Set("medium"))
+    InstanceSizeNormalisationFactor.combosFor(0) shouldBe Stream.empty
+    InstanceSizeNormalisationFactor.combosFor(1) shouldBe Stream(List("small"))
+    InstanceSizeNormalisationFactor.combosFor(2).toSet shouldBe Set(List("medium"), List("small", "small"))
 
+    // the change of ordering between medium-small and small-medium isn't actually a new combo,
+    // but at the moment I can't think of a way of eliminating
+    InstanceSizeNormalisationFactor.combosFor(3).toSet shouldBe
+      Set(List("medium", "small"), List("small", "medium"), List("small", "small", "small"))
+
+    InstanceSizeNormalisationFactor.combosFor(16).foreach { l =>
+      println(l)
+    }
   }
 }

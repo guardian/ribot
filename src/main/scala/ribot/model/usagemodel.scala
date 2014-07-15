@@ -22,12 +22,15 @@ case class Usage
 
   def region = az dropRight 1
 
-  def reservationCriteria = ReservationCriteria(instanceType, az, networkClass)
+  def reservationCriteria = ReservationCriteria(instanceType, az, networkClass, quantity)
 
 }
 
 case class UsagesByRegion(region: String, usages: List[Usage]) {
-  def reservationsRequired = usages.map(_.reservationCriteria)
+  def reservationsRequiredFor(instanceClass: String) =
+    reservationsRequired.filter(_.instanceType.instanceClass == instanceClass)
+
+  lazy val reservationsRequired = usages.map(_.reservationCriteria)
 }
 
 case class UsagesByInstanceClass(instanceClass: String, usages: List[Usage])
