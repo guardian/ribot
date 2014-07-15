@@ -60,7 +60,9 @@ case class Reservation
   // i.e. where this roundedEndDate is the same
   def roundedEndDate = endDate.withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0)
 
-  def points = criteria.instanceType.sizeNormalistionFactor
+  def points = criteria.points
+
+  override def toString = s"$reservationId ($criteria) expires $endDate"
 }
 
 object Reservation {

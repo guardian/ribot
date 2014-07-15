@@ -3,6 +3,12 @@ package ribot.model
 // This represents a group of reserved instances that are completely mergable and splittable
 // (ie. they have the same end date)
 case class ReservationGroup(existingReservations: List[Reservation], proposedReservations: List[ReservationCriteria] = Nil) {
+  def describeAction: String =
+    s"""   Take these reservations
+       |     ${existingReservations.map(_.toString).mkString("\n     ")}
+       |   and apply like this:
+       |     ${changes.mkString("\n     ")}""".stripMargin
+
   val totalPoints = existingReservations.map(_.points).sum
   val spentPoints = proposedReservations.map(_.points).sum
   val sparePoints = totalPoints - spentPoints
@@ -10,6 +16,7 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
   override def toString =
     s"TOTAL: $totalPoints ==> SPENT: $spentPoints, left: $sparePoints"
 
+  def changes = ReservationCriteria.aggregate(proposedReservations).map(_.toString)
 
   def spend(proposed: ReservationCriteria): ReservationGroup = {
     this.copy(

@@ -11,7 +11,7 @@ import scala.collection.convert.decorateAll._
 object ReservationMain /*extends App*/ {
   println("Getting reservations")
 
-  val regions = List(Regions.US_WEST_1, Regions.EU_WEST_1, Regions.US_WEST_1) map Region.getRegion
+  val regions = List(Regions.EU_WEST_1) map Region.getRegion
 
   val creds = new ProfileCredentialsProvider("profile billing")
 
@@ -22,20 +22,26 @@ object ReservationMain /*extends App*/ {
 
     val rawResult = ec2.describeReservedInstances()
 
-    val resGroups = rawResult.getReservedInstances.asScala
+    val reservation = rawResult.getReservedInstances.asScala
       .flatMap(Reservation.fromAws)
-      .groupBy(_.roundedEndDate)
+      .find(_.reservationId == "f127bd27-0a15-4331-906e-39bc569baaa8")
+      .get
 
-    for ((dt, res) <- resGroups) {
-      println(s"  End date: $dt")
+    println(reservation.toString)
+    println(reservation.points)
 
-      for ((instanceClass, rrr) <- res.groupBy(_.criteria.instanceType.instanceClass).toList.sortBy(_._1)) {
-        println(s"      class $instanceClass:")
-        rrr.foreach(r => println(s"          $r"))
-
-         // ${rrr.map(r => r.criteria.instanceType.sizeNormalistionFactor * r.numInstances).sum}")
-      }
-    }
+//      .groupBy(_.roundedEndDate)
+//
+//    for ((dt, res) <- resGroups) {
+//      println(s"  End date: $dt")
+//
+//      for ((instanceClass, rrr) <- res.groupBy(_.criteria.instanceType.instanceClass).toList.sortBy(_._1)) {
+//        println(s"      class $instanceClass:")
+//        rrr.foreach(r => println(s"          $r"))
+//
+//         // ${rrr.map(r => r.criteria.instanceType.sizeNormalistionFactor * r.numInstances).sum}")
+//      }
+//    }
 
   }
 

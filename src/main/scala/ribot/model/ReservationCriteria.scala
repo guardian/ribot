@@ -11,6 +11,8 @@ case class ReservationCriteria
   def pointBreakdown = s"$numInstances * ${instanceType.sizeNormalistionFactor} = $points"
 
   def instanceClass = instanceType.instanceClass
+
+  override def toString = s"$numInstances * ${instanceType.name} in $az ($networkClass)"
 }
 
 object ReservationCriteria {

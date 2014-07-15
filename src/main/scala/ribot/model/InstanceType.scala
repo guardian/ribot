@@ -12,7 +12,7 @@ object InstanceType {
   }
 
   def classes = List(
-    "t1", "t2",
+    //"t1", "t2",
     "m1", "m2", "m3",
     "c1", "c3",
     "r3",

@@ -31,32 +31,22 @@ object RibotMain extends App {
     val reservations = ReservationsByRegion.forRegion(regionUsages.region)
 
     // now by instance class
-    for (instanceClass <- InstanceType.classes if instanceClass == "c3") {
+    for (instanceClass <- InstanceType.classes) {
       val desiredReservations = regionUsages.reservationsRequiredFor(instanceClass)
       val actualReservations = reservations.forClass(instanceClass)
 
       if (desiredReservations.size + actualReservations.size > 0) {
-        println("  Instance class: " + instanceClass)
+        println("INSTANCE CLASS: " + instanceClass)
 
         val groups = ReservationGroup.make(actualReservations)
 
-        println("These are the reservations that exists, and we want to spend:")
-        for (group <- groups)
-          println("       " + group)
+        val newGroups = ReservationAllocator.makeItSo(desiredReservations, groups)
 
-        //ReservationCriteria.aggregate(actualReservationCriteria).foreach(r => println("      " + r))
-        println("Based on what we used in our sample hour, this is what we want to reserve:")
-
-        val unallocated = ReservationCriteria.unaggregate(desiredReservations)
-          .sortBy(_.points).reverse
-
-        val application = ReservationApplication(unallocated, ReservationGroups(groups))
-
-        println("At the start: " + application)
-
-        val result = application.makeItSo
-
-        println("\n\nAt the end: " + result)
+        println("After allocation:")
+        for (group <- newGroups) {
+          println(" * " + group)
+          println(group.describeAction)
+        }
 
       }
 
@@ -69,38 +59,28 @@ object RibotMain extends App {
 }
 
 
-case class ReservationGroups(groups: List[ReservationGroup]) {
-  override def toString = groups.mkString("\n    ")
+object ReservationAllocator {
+  def makeItSo(unallocatedDesiredReservations: List[ReservationCriteria], groups: List[ReservationGroup]): List[ReservationGroup] = {
+    val unallocated = ReservationCriteria.unaggregate(unallocatedDesiredReservations)
+      .sortBy(_.points).reverse
 
-  def possiblyApply(r: ReservationCriteria): ReservationGroups = {
-    def possiblyApplyImpl(nextGroups: List[ReservationGroup]): List[ReservationGroup] =
+    unallocated.foldLeft(groups) { case (acc, nextDesiredReservation) =>
+      possiblyApply(acc, nextDesiredReservation)
+    }
+  }
+
+  def possiblyApply(groups: List[ReservationGroup], r: ReservationCriteria): List[ReservationGroup] = {
+    def possiblyApplyImpl(nextGroups: List[ReservationGroup]): List[ReservationGroup] = {
       nextGroups match {
         case Nil => Nil
         case head :: rest if head.sparePoints >= r.points => head.spend(r) :: rest
         case head :: rest => head :: possiblyApplyImpl(rest)
       }
-
-    this.copy(groups = possiblyApplyImpl(groups))
-  }
-}
-
-
-case class ReservationApplication
-(
-  unallocatedDesiredReservations: List[ReservationCriteria],
-  reservationGroups: ReservationGroups
-)  {
-
-  def makeItSo: ReservationGroups = {
-    unallocatedDesiredReservations.foldLeft(reservationGroups) { case (currentGroups, nextDesiredReservation) =>
-      currentGroups.possiblyApply(nextDesiredReservation)
     }
+
+    possiblyApplyImpl(groups)
   }
 
-  override def toString = {
-    s"unallocated:\n  ${unallocatedDesiredReservations.mkString("\n  ")}\n" +
-    s"groups:\n  $reservationGroups"
-
-  }
 }
+
 
