@@ -1,0 +1,324 @@
+2014-07-16 23:05:53,438 - [INFO] - from play in pool-82-thread-2 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2014-07-16 23:06:13,588 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:06:14,248 - [INFO] - from akka.event.slf4j.Slf4jLogger in play-akka.actor.default-dispatcher-3 
+Slf4jLogger started
+
+2014-07-16 23:08:38,687 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:12:12,158 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:12:12,475 - [DEBUG] - from application in play-akka.actor.default-dispatcher-4 
+Unforseen error for lib/bootstrap/js/bootstap.min.js at /public
+java.lang.RuntimeException: no resource
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.getOrElse(Option.scala:120) [scala-library-2.11.1.jar:na]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread$$anon$3.block(ThreadPoolBuilder.scala:169) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.managedBlock(ForkJoinPool.java:3640) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread.blockOn(ThreadPoolBuilder.scala:167) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.package$.blocking(package.scala:54) ~[scala-library-2.11.1.jar:na]
+	at controllers.Assets$.controllers$Assets$$assetInfoFromResource(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfo(Assets.scala:245) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfoForRequest(Assets.scala:253) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:394) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:393) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.scala$concurrent$impl$Promise$DefaultPromise$$dispatchOrAddCallback(Promise.scala:280) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.onComplete(Promise.scala:270) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$class.flatMap(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.flatMap(Promise.scala:153) ~[scala-library-2.11.1.jar:na]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:393) [play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:389) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:556) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:555) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:518) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.3.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2014-07-16 23:12:14,571 - [DEBUG] - from application in play-akka.actor.default-dispatcher-6 
+Unforseen error for lib/bootstrap/js/bootstap.min.js at /public
+java.lang.RuntimeException: no resource
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.getOrElse(Option.scala:120) [scala-library-2.11.1.jar:na]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread$$anon$3.block(ThreadPoolBuilder.scala:169) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.managedBlock(ForkJoinPool.java:3640) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread.blockOn(ThreadPoolBuilder.scala:167) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.package$.blocking(package.scala:54) ~[scala-library-2.11.1.jar:na]
+	at controllers.Assets$.controllers$Assets$$assetInfoFromResource(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfo(Assets.scala:245) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfoForRequest(Assets.scala:253) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:394) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:393) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.scala$concurrent$impl$Promise$DefaultPromise$$dispatchOrAddCallback(Promise.scala:280) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.onComplete(Promise.scala:270) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$class.flatMap(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.flatMap(Promise.scala:153) ~[scala-library-2.11.1.jar:na]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:393) [play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:389) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:556) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:555) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:518) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.3.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2014-07-16 23:12:28,327 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:12:28,815 - [DEBUG] - from application in play-akka.actor.default-dispatcher-4 
+Unforseen error for lib/bootstrap/js/bootstap.min.js at /public
+java.lang.RuntimeException: no resource
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.getOrElse(Option.scala:120) [scala-library-2.11.1.jar:na]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread$$anon$3.block(ThreadPoolBuilder.scala:169) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.managedBlock(ForkJoinPool.java:3640) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread.blockOn(ThreadPoolBuilder.scala:167) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.package$.blocking(package.scala:54) ~[scala-library-2.11.1.jar:na]
+	at controllers.Assets$.controllers$Assets$$assetInfoFromResource(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfo(Assets.scala:245) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfoForRequest(Assets.scala:253) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:394) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:393) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.scala$concurrent$impl$Promise$DefaultPromise$$dispatchOrAddCallback(Promise.scala:280) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.onComplete(Promise.scala:270) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$class.flatMap(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.flatMap(Promise.scala:153) ~[scala-library-2.11.1.jar:na]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:393) [play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:389) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:556) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:555) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:518) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.3.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2014-07-16 23:14:56,214 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:14:56,521 - [DEBUG] - from application in play-akka.actor.default-dispatcher-7 
+Unforseen error for lib/bootstrap/js/bootstap.min.js at /public
+java.lang.RuntimeException: no resource
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1$$anonfun$13.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.getOrElse(Option.scala:120) [scala-library-2.11.1.jar:na]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:237) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$$anonfun$controllers$Assets$$assetInfoFromResource$1.apply(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread$$anon$3.block(ThreadPoolBuilder.scala:169) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.managedBlock(ForkJoinPool.java:3640) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.MonitorableThreadFactory$AkkaForkJoinWorkerThread.blockOn(ThreadPoolBuilder.scala:167) ~[akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.package$.blocking(package.scala:54) ~[scala-library-2.11.1.jar:na]
+	at controllers.Assets$.controllers$Assets$$assetInfoFromResource(Assets.scala:236) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfo(Assets.scala:245) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.Assets$.assetInfoForRequest(Assets.scala:253) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:394) ~[play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1$$anonfun$17.apply(Assets.scala:393) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) ~[scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) ~[play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.scala$concurrent$impl$Promise$DefaultPromise$$dispatchOrAddCallback(Promise.scala:280) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.onComplete(Promise.scala:270) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$class.flatMap(Future.scala:249) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.flatMap(Promise.scala:153) ~[scala-library-2.11.1.jar:na]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:393) [play_2.11-2.3.1.jar:2.3.1]
+	at controllers.AssetsBuilder$$anonfun$at$1.apply(Assets.scala:389) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:556) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$.invokeBlock(Action.scala:555) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:518) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) [play_2.11-2.3.1.jar:2.3.1]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) [play_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at play.api.libs.iteratee.DoneIteratee$$anonfun$mapM$2.apply(Iteratee.scala:705) [play-iteratees_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.3.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.3.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2014-07-16 23:18:00,806 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:20:07,547 - [ERROR] - from application in New I/O worker #3 
+
+
+! @6ipode41e - Internal server error, for (GET) [/?] ->
+
+play.PlayExceptions$CompilationException: Compilation error[Unrecognised input]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:297) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:292) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:292) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:325) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:325) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:325) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:107) ~[play_2.11-2.3.1.jar:2.3.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:105) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+
+2014-07-16 23:26:53,301 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:27:13,297 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:27:54,403 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:28:54,897 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:30:45,403 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:33:43,023 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:36:29,047 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:39:23,325 - [ERROR] - from application in New I/O worker #4 
+
+
+! @6ipog1nkh - Internal server error, for (GET) [/?] ->
+
+play.PlayExceptions$CompilationException: Compilation error[Cannot find an implicit ExecutionContext. You might pass
+an (implicit ec: ExecutionContext) parameter to your method
+or import scala.concurrent.ExecutionContext.Implicits.global.]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at play.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:297) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$play$PlayReloader$$anon$$taskFailureHandler$1.apply(PlayReloader.scala:292) ~[na:na]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1.play$PlayReloader$$anon$$taskFailureHandler(PlayReloader.scala:292) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:325) ~[na:na]
+	at play.PlayReloader$$anon$1$$anonfun$reload$2.apply(PlayReloader.scala:325) ~[na:na]
+	at scala.util.Either$LeftProjection.map(Either.scala:377) ~[scala-library-2.11.1.jar:na]
+	at play.PlayReloader$$anon$1.reload(PlayReloader.scala:325) ~[na:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:107) ~[play_2.11-2.3.1.jar:2.3.1]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:105) ~[play_2.11-2.3.1.jar:2.3.1]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+
+2014-07-16 23:39:44,509 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2014-07-16 23:39:44,541 - [INFO] - from application in ForkJoinPool-3-worker-7 
+GET /?
+	 => Result(200, Map(Content-Type -> text/html; charset=utf-8))
+
+2014-07-16 23:39:44,743 - [INFO] - from application in ForkJoinPool-3-worker-7 
+GET /assets/main.min.css
+	 => Result(304, Map(Cache-Control -> no-cache, ETag -> "c9d3198aac620c4d445facb76d6b9ac89e777882", Last-Modified -> Wed, 16 Jul 2014 22:30:45 GMT))
+
+2014-07-16 23:39:44,867 - [INFO] - from application in ForkJoinPool-3-worker-7 
+GET /assets/lib/bootstrap/css/bootstrap.min.css
+	 => Result(304, Map(Cache-Control -> no-cache, ETag -> "c21aa580520a0cb5a5388ec6c41c887d003afde8", Last-Modified -> Wed, 16 Jul 2014 22:06:12 GMT))
+
+2014-07-16 23:39:44,973 - [INFO] - from application in ForkJoinPool-3-worker-7 
+GET /assets/lib/bootstrap/js/bootstrap.min.js
+	 => Result(304, Map(Cache-Control -> no-cache, ETag -> "9eb1e08fe911f023c3ee2a5b1467777f7570e1d1", Last-Modified -> Wed, 16 Jul 2014 22:06:12 GMT))
+
+2014-07-16 23:39:45,172 - [INFO] - from application in ForkJoinPool-3-worker-7 
+GET /assets/lib/jquery/jquery.min.js
+	 => Result(304, Map(Cache-Control -> no-cache, ETag -> "50e18bc43f16b005c0c7a7a32ca7694b3fb942f7", Last-Modified -> Wed, 16 Jul 2014 22:06:12 GMT))
+
