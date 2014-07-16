@@ -8,35 +8,35 @@ import ribot.model.{UsagesByRegion, Classic}
 
 object BillingCsvMain /* extends App */ {
 
-  println("hi dude!")
-
-  //val filename = "/Users/gtackley/billing/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-07.csv.zip"
-  val filename = "/Users/gtackley/billing/smaller.csv.zip"
-
-//  val yesterday = new LocalDate().minusDays(1)
-//  val yesterdayAtEightPm = yesterday.toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
-  val hardcodedDateTime = new DateTime(2014, 7, 13, 8, 0, DateTimeZone.UTC)
-
-  val usages = BillingCsvReader
-    .parseZip(new File(filename))
-    .filter(_.isEc2InstanceUsage)
-    .filter(_.availabilityZone != null)
-    .filter(_.usageStartDate == hardcodedDateTime)
-    // TODO: need to figure out VPS vs Classic
-    .map(_.asUsage(Classic))
-    .groupBy(_.region)
-    .map { case (region, regionUsages) => UsagesByRegion(region, regionUsages.toList) }
-
-
-  for (regionInfo <- usages) {
-    println()
-    println(s"*** ${regionInfo.region} ***")
-    println()
-
-    for ((instanceClass, rrr) <- regionInfo.reservationsRequired.groupBy(_.instanceType.instanceClass).toList.sortBy(_._1)) {
-      println(s"  $instanceClass: required ${rrr.map(r => r.instanceType.sizeNormalistionFactor).sum}")
-    }
-  }
+//  println("hi dude!")
+//
+//  //val filename = "/Users/gtackley/billing/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-07.csv.zip"
+//  val filename = "/Users/gtackley/billing/smaller.csv.zip"
+//
+////  val yesterday = new LocalDate().minusDays(1)
+////  val yesterdayAtEightPm = yesterday.toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
+//  val hardcodedDateTime = new DateTime(2014, 7, 13, 8, 0, DateTimeZone.UTC)
+//
+//  val usages = BillingCsvReader
+//    .parseZip(new File(filename))
+//    .filter(_.isEc2InstanceUsage)
+//    .filter(_.availabilityZone != null)
+//    .filter(_.usageStartDate == hardcodedDateTime)
+//    // TODO: need to figure out VPS vs Classic
+//    .map(_.asUsage(Classic))
+//    .groupBy(_.region)
+//    .map { case (region, regionUsages) => UsagesByRegion(region, regionUsages.toList) }
+//
+//
+//  for (regionInfo <- usages) {
+//    println()
+//    println(s"*** ${regionInfo.region} ***")
+//    println()
+//
+//    for ((instanceClass, rrr) <- regionInfo.reservationsRequired.groupBy(_.instanceType.instanceClass).toList.sortBy(_._1)) {
+//      println(s"  $instanceClass: required ${rrr.map(r => r.instanceType.sizeNormalistionFactor).sum}")
+//    }
+//  }
 
 
   /*

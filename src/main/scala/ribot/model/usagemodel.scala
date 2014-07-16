@@ -24,13 +24,27 @@ case class Usage
 
   def reservationCriteria = ReservationCriteria(instanceType, az, networkClass, quantity)
 
+  def reservedString = if (wasReserved) "RESERVED" else "ON-DEMAND"
+  def summary = s"$quantity * ${instanceType.name} in $az ($networkClass) $reservedString $$$hourlyCost"
 }
 
 case class UsagesByRegion(region: String, usages: List[Usage]) {
-  def reservationsRequiredFor(instanceClass: String) =
-    reservationsRequired.filter(_.instanceType.instanceClass == instanceClass)
-
-  lazy val reservationsRequired = usages.map(_.reservationCriteria)
+  def forInstanceClass(instanceClass: String) =
+    usages.filter(_.instanceType.instanceClass == instanceClass)
 }
 
-case class UsagesByInstanceClass(instanceClass: String, usages: List[Usage])
+object Usage {
+  def prettyPrint(usages: List[Usage]) {
+    aggregate(usages)
+      .sortBy(u => s"${u.instanceType} ${u.az} ${u.networkClass} ${u.reservedString}")
+      .foreach(u => println(u.summary))
+
+  }
+
+  def aggregate(usages: List[Usage]): List[Usage] = {
+    usages.groupBy(identity)
+      .values
+      .map (l => l.head.copy(quantity = l.map(_.quantity).sum))
+      .toList
+  }
+}

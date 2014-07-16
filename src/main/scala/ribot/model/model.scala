@@ -43,9 +43,15 @@ object InstanceSizeNormalisationFactor {
 }
 
 
-sealed trait NetworkClass
-case object Classic extends NetworkClass
-case object VPC extends NetworkClass
+sealed trait NetworkClass {
+  def platformName: String
+}
+case object Classic extends NetworkClass {
+  val platformName = "EC2-Classic"
+}
+case object VPC extends NetworkClass {
+  val platformName = "EC2-VPC"
+}
 
 
 

@@ -7,7 +7,10 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
     s"""   Take these reservations
        |     ${existingReservations.map(_.toString).mkString("\n     ")}
        |   and apply like this:
-       |     ${changes.mkString("\n     ")}""".stripMargin
+       |     ${changes.mkString("\n     ")}
+       |   command line:
+       |     $commandLine
+       |     """.stripMargin
 
   val totalPoints = existingReservations.map(_.points).sum
   val spentPoints = proposedReservations.map(_.points).sum
@@ -16,7 +19,18 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
   override def toString =
     s"TOTAL: $totalPoints ==> SPENT: $spentPoints, left: $sparePoints"
 
-  def changes = ReservationCriteria.aggregate(proposedReservations).map(_.toString)
+  lazy val aggReservations = ReservationCriteria.aggregate(proposedReservations)
+  def changes = aggReservations.map(_.toString)
+
+  def commandLine =
+    s"""
+       |aws ec2 modify-reserved-instances \\
+       | --reserved-instances-ids ${existingReservations.map(_.reservationId).mkString(" ")} \\
+       | --target-configurations \\
+       |  $cmdLineTargetConfigs
+     """.stripMargin
+
+  def cmdLineTargetConfigs = aggReservations.map(_.awsCliString).mkString(" \\\n  ")
 
   def spend(proposed: ReservationCriteria): ReservationGroup = {
     this.copy(

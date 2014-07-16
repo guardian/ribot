@@ -12,7 +12,11 @@ case class ReservationCriteria
 
   def instanceClass = instanceType.instanceClass
 
+  def sortString = s"$az ${instanceType.name}"
+
   override def toString = s"$numInstances * ${instanceType.name} in $az ($networkClass)"
+
+  def awsCliString = s"AvailabilityZone=$az,Platform=${networkClass.platformName},InstanceCount=$numInstances,InstanceType=${instanceType.name}"
 }
 
 object ReservationCriteria {
@@ -31,7 +35,7 @@ object ReservationCriteria {
           numInstances = rclist.map(_.numInstances).sum
         )
       }
-      .sortBy(_.toString)
+      .sortBy(_.sortString)
   }
 
   def superAggregate(unsorted: List[ReservationCriteria]): List[ReservationCriteria] = {

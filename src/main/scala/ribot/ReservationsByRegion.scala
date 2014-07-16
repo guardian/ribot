@@ -16,12 +16,11 @@ case class ReservationsByRegion
 }
 
 object ReservationsByRegion {
-  val creds = new ProfileCredentialsProvider("profile billing")
 
   def forRegion(regionName: String): ReservationsByRegion = {
     val region = Region.getRegion(Regions.fromName(regionName))
     
-    val ec2 = region.createClient(classOf[AmazonEC2Client], creds, null)
+    val ec2 = region.createClient(classOf[AmazonEC2Client], AWS.credentials, null)
 
     val all = ec2.describeReservedInstances()
       .getReservedInstances.asScala
