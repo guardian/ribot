@@ -1,19 +1,10 @@
-import play.api.mvc.{Result, RequestHeader, Filter, WithFilters}
-import play.api.{Logger, Application, GlobalSettings}
-import ribot.elasticsearch.Elasticsearch
+import play.api.mvc.{Filter, RequestHeader, Result, WithFilters}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-
 import scala.concurrent.Future
 
 object Global extends WithFilters(AccessLog) {
 
-
-  override def onStop(app: Application) {
-    println("closing...")
-    Elasticsearch.stop()
-    println("closed")
-  }
 }
 
 

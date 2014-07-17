@@ -6,7 +6,7 @@ import ribot.model.{NetworkClass, Classic, Usage, InstanceType}
 
 // represents the standard data provided by a row within the
 // aws-billing-detailed-line-items-with-resources-and-tags csv file provided by amazon
-class BillingCsvRow(values: Map[String, String], lineNumber: Long) {
+class BillingCsvRow(val values: Map[String, String], lineNumber: Long) {
   // always "Estimated" for this months invoice
   def invoiceId = values("InvoiceId")
 

@@ -32,8 +32,6 @@ object RibotBuild extends Build {
     .settings(
       libraryDependencies ++= Seq(
         "net.sf.supercsv" % "super-csv" % "2.2.0",
-        "org.elasticsearch" % "elasticsearch" % "1.2.2",
-        "com.sksamuel.elastic4s" %% "elastic4s" % "1.2.1.2",
         "com.typesafe.play" %% "play-json" % "2.3.1",
         "com.amazonaws" % "aws-java-sdk" % "1.8.5",
         "joda-time" % "joda-time" % "2.3",
