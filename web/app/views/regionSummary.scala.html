@@ -1,0 +1,18 @@
+@(region: String, instanceClasses: List[String])
+
+@import lib.ViewHelpers._
+@snippets.skel {
+    @snippets.nav()
+
+    <div class="container">
+        <h1>@region</h1>
+
+
+        @snippets.instanceClassTabs(region, None, instanceClasses)
+
+        <div>
+            some stuff here.
+        </div>
+
+    </div>
+}

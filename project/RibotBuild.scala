@@ -32,15 +32,19 @@ object RibotBuild extends Build {
     .settings(
       libraryDependencies ++= Seq(
         "net.sf.supercsv" % "super-csv" % "2.2.0",
-        "org.elasticsearch" % "elasticsearch" % "1.2.1",
+        "org.elasticsearch" % "elasticsearch" % "1.2.2",
+        "com.sksamuel.elastic4s" %% "elastic4s" % "1.2.1.2",
         "com.typesafe.play" %% "play-json" % "2.3.1",
-        "com.amazonaws" % "aws-java-sdk" % "1.8.4",
+        "com.amazonaws" % "aws-java-sdk" % "1.8.5",
         "joda-time" % "joda-time" % "2.3",
 
         "org.joda" % "joda-convert" % "1.6" % "provided",
 
         "org.scalatest" %% "scalatest" % "2.2.0" % "test"
-      )
+      ),
+
+      fork in run := true,
+      javaOptions in run += "-Xmx2G"
     )
 
   lazy val web = Project("web", file("web"))
@@ -56,7 +60,8 @@ object RibotBuild extends Build {
 
       libraryDependencies ++= Seq(
         "org.webjars" % "bootstrap" % "3.2.0",
-        "org.webjars" % "jquery" % "2.1.1"
+        "org.webjars" % "jquery" % "2.1.1",
+        "org.webjars" % "rickshaw" % "1.5.0"
       )
 
     )

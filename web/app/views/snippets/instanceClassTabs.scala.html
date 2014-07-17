@@ -1,0 +1,13 @@
+@(region: String, currentCls: Option[String], instanceClasses: List[String])
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="@if(currentCls.isEmpty) @{ "active" }">
+        <a href="@routes.Application.showRegion(region)">Summary</a>
+    </li>
+    @for(cls <- instanceClasses) {
+
+        <li class="@if(currentCls contains cls) @{ "active" }">
+            <a href="@routes.Application.showClass(region, cls)">@cls</a>
+        </li>
+    }
+</ul>

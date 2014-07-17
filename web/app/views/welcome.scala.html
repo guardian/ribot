@@ -1,7 +1,20 @@
+@(count: Long, regions: List[String])
+
+@import lib.ViewHelpers._
 @snippets.skel {
     @snippets.nav()
 
     <div class="container">
         <h1>Hello, world!</h1>
+
+        <p>Elasticsearch claims to have @fmt(count) entries.</p>
+
+
+        <p>Please select a region:</p>
+        <ul>
+           @for(region <- regions) {
+               <li><a href="@routes.Application.showRegion(region)">@region</a></li>
+           }
+        </ul>
     </div>
 }
