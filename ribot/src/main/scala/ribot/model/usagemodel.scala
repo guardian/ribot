@@ -2,6 +2,8 @@ package ribot.model
 
 import org.joda.time.{Duration, DateTime}
 
+import scala.collection.GenSeq
+
 
 case class Usage
 (
@@ -41,7 +43,7 @@ object Usage {
 
   }
 
-  def aggregate(usages: List[Usage]): List[Usage] = {
+  def aggregate(usages: GenSeq[Usage]): List[Usage] = {
     usages.groupBy(identity)
       .values
       .map (l => l.head.copy(quantity = l.map(_.quantity).sum))

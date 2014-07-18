@@ -1,17 +1,17 @@
-@(region: String, instanceClasses: List[String])
+@(region: String, data: ribot.billing.BillingData)
 
 @import lib.ViewHelpers._
-@snippets.skel {
-    @snippets.nav()
+@snippets.skel(region) {
+    @snippets.nav(data, Some(region))
 
     <div class="container">
-        <h1>@region</h1>
 
+        @snippets.instanceClassTabs(region, None, data.instanceClasses)
 
-        @snippets.instanceClassTabs(region, None, instanceClasses)
-
-        <div>
-            some stuff here.
+        <div class="row">
+            <div class="col-md-12">
+                some stuff here.
+            </div>
         </div>
 
     </div>

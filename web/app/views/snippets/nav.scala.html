@@ -1,3 +1,5 @@
+@(data: ribot.billing.BillingData, selectedRegion: Option[String] = None)
+
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,14 +10,17 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand ribot-logo" href="/">ribot</a>
+            <a class="navbar-brand ribot-logo" href="@routes.Application.index()">ribot</a>
         </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content ftoggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Admin</a></li>
+                @for(region <- data.global.regions) {
+                    <li class="@if(selectedRegion contains region) @{"active"}" >
+                        <a href="@routes.Application.showRegion(region)">@region</a>
+                    </li>
+                }
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -55,6 +55,7 @@ case object VPC extends NetworkClass {
 
 
 
+
 case class Reservation
 (
   criteria: ReservationCriteria,
@@ -72,6 +73,10 @@ case class Reservation
 }
 
 object Reservation {
+
+  // TODO: I think if we keep non-active reservations around too, then
+  //  we may be able to ask the question "what reservations were active on
+  //  date X, so we can see / graph historical changes
   def fromAws(r: ReservedInstances): List[Reservation] = {
     if (r.getState != "active") Nil
     else {

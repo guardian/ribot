@@ -1,20 +1,17 @@
-@(count: Long, regions: List[String])
+@(data: ribot.billing.BillingData)
 
 @import lib.ViewHelpers._
-@snippets.skel {
-    @snippets.nav()
+@snippets.skel("home") {
+    @snippets.nav(data)
 
     <div class="container">
         <h1>Hello, world!</h1>
 
-        <p>Elasticsearch claims to have @fmt(count) entries.</p>
+        <p>
+            We’ve got @fmt(data.raw.size) data entries, ranging from @data.firstDate to @data.lastDate.
+        </p>
 
 
-        <p>Please select a region:</p>
-        <ul>
-           @for(region <- regions) {
-               <li><a href="@routes.Application.showRegion(region)">@region</a></li>
-           }
-        </ul>
+        <p>Please select a region from the toolbar above.</p>
     </div>
 }

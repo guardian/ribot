@@ -5,6 +5,7 @@ import java.io.File
 import org.joda.time.{DateTimeZone, LocalDate, LocalTime}
 import ribot.billing.BillingCsvReader
 import ribot.model._
+import ribot.reservations.ReservationData
 
 object RibotMain extends App {
 
@@ -27,13 +28,13 @@ object RibotMain extends App {
   for (regionUsages <- usagesByRegion if regionUsages.region == "eu-west-1") {
     println(s"*** region: ${regionUsages.region} ***")
 
-    val reservations = ReservationsByRegion.forRegion(regionUsages.region)
+    val reservations = ReservationData(regionUsages.region)
 
     // now by instance class
     for (instanceClass <- InstanceType.classes) {
       val actualUsage = regionUsages.forInstanceClass(instanceClass)
       val desiredReservations = actualUsage.map(_.reservationCriteria)
-      val actualReservations = reservations.forClass(instanceClass)
+      val actualReservations = reservations.forClass(instanceClass).all.toList
 
       if (desiredReservations.size + actualReservations.size > 0) {
         println("\n\nINSTANCE CLASS: " + instanceClass)

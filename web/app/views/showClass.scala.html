@@ -1,18 +1,81 @@
-@(region: String, cls: String, instanceClasses: List[String])
+@(region: String, cls: String, billingData: ribot.billing.BillingData, pointsData: String, reservationData: ribot.reservations.ReservationData)
 
 @import lib.ViewHelpers._
-@snippets.skel {
-    @snippets.nav()
+    
+@classForUsage(u: ribot.model.Usage) = @{
+    if(u.wasReserved) "success" else "danger"
+}
+@snippets.skel(s"$cls in $region", List("https://www.google.com/jsapi")) {
+    @snippets.nav(billingData, Some(region))
+
+    <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = new google.visualization.DataTable(
+          @Html(pointsData)
+        );
+
+        var options = {
+          title: 'Points Applied'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('points_graph'));
+        chart.draw(data, options);
+    }
+    </script>
 
     <div class="container">
-        <h1>@region</h1>
 
+        @snippets.instanceClassTabs(region, Some(cls), billingData.parent.get.instanceClasses)
 
-        @snippets.instanceClassTabs(region, Some(cls), instanceClasses)
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center">Total points reserved: @reservationData.totalPoints</h3>
 
-        <div>
-            some stuff here.
+                <div id="points_graph" style="height: 500px;">
+                </div>
+
+            </div>
+
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <h3>Usage yesterday at 8pm</h3>
+
+                <table class="table">
+
+
+                    <thead>
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Instance Type</th>
+                            <th>AZ</th>
+                            <th>Reserved?</th>
+                            <th>Hourly cost charged</th>
+                        </tr>
+                    </thead>
+                    @for(u <- billingData.forOneHourYesterdayEvening.aggregatedUsage) {
+
+                    <tr class="@classForUsage(u)">
+                        <td>@u.quantity</td>
+                        <td>@u.instanceType.name (@u.instanceType.sizeNormalistionFactor points)</td>
+                        <td>@u.az</td>
+                        <td>@u.reservedString</td>
+                        <td>$@u.hourlyCost</td>
+
+                    </tr>
+                }
+                </table>
+
+            </div>
+
+
+        </div>
+
 
     </div>
 }

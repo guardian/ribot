@@ -57,6 +57,8 @@ object RibotBuild extends Build {
       includeFilter in (Assets, LessKeys.less) := "*.less",
 
       libraryDependencies ++= Seq(
+        "com.google.visualization" % "visualization-datasource" % "1.1.1",
+
         "org.webjars" % "bootstrap" % "3.2.0",
         "org.webjars" % "jquery" % "2.1.1",
         "org.webjars" % "rickshaw" % "1.5.0"

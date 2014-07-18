@@ -30,7 +30,7 @@ object BillingCsvReader {
       if (csvReader.getLineNumber % 100000 == 0)
         println(s"[reading line ${csvReader.getLineNumber}]")
 
-      if (line == null) Stream()
+      if (line == null) Stream.empty
       else new BillingCsvRow(line.asScala.toMap, csvReader.getLineNumber) #:: streamUntilEof()
     }
 
