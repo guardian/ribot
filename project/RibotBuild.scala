@@ -6,7 +6,7 @@ import sbt._
 
 object RibotBuild extends Build {
 
-  val scalaLibraryVersion = "2.11.1"
+  val scalaLibraryVersion = "2.11.2"
 
   lazy val root = sbt.Project("root", file("."))
     .aggregate(ribot, web)
@@ -32,17 +32,17 @@ object RibotBuild extends Build {
     .settings(
       libraryDependencies ++= Seq(
         "net.sf.supercsv" % "super-csv" % "2.2.0",
-        "com.typesafe.play" %% "play-json" % "2.3.1",
-        "com.amazonaws" % "aws-java-sdk" % "1.8.5",
-        "joda-time" % "joda-time" % "2.3",
+        "com.typesafe.play" %% "play-json" % "2.3.2",
+        "com.amazonaws" % "aws-java-sdk" % "1.8.7",
+        "joda-time" % "joda-time" % "2.4",
 
         "com.google.guava" % "guava" % "15.0",
         "com.google.code.findbugs" % "annotations" % "3.0.0",
-        "org.slf4j" % "slf4j-api" % "1.7.6",
+        "org.slf4j" % "slf4j-api" % "1.7.7",
 
-        "org.joda" % "joda-convert" % "1.6" % "provided",
+        "org.joda" % "joda-convert" % "1.7" % "provided",
 
-        "org.scalatest" %% "scalatest" % "2.2.0" % "test"
+        "org.scalatest" %% "scalatest" % "2.2.1" % "test"
       ),
 
       fork in run := true,

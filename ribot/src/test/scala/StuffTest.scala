@@ -77,18 +77,18 @@ class StuffTest extends FlatSpec with Matchers {
     }
   }
 
-  "Size normalizer" should "be able to build possible combos" in {
-    InstanceSizeNormalisationFactor.combosFor(0) shouldBe Stream.empty
-    InstanceSizeNormalisationFactor.combosFor(1) shouldBe Stream(List("small"))
-    InstanceSizeNormalisationFactor.combosFor(2).toSet shouldBe Set(List("medium"), List("small", "small"))
-
-    // the change of ordering between medium-small and small-medium isn't actually a new combo,
-    // but at the moment I can't think of a way of eliminating
-    InstanceSizeNormalisationFactor.combosFor(3).toSet shouldBe
-      Set(List("medium", "small"), List("small", "medium"), List("small", "small", "small"))
-
-    InstanceSizeNormalisationFactor.combosFor(16).foreach { l =>
-      println(l)
-    }
-  }
+//  "Size normalizer" should "be able to build possible combos" in {
+//    InstanceSizeNormalisationFactor.combosFor(0) shouldBe Stream.empty
+//    InstanceSizeNormalisationFactor.combosFor(1) shouldBe Stream(List("small"))
+//    InstanceSizeNormalisationFactor.combosFor(2).toSet shouldBe Set(List("medium"), List("small", "small"))
+//
+//    // the change of ordering between medium-small and small-medium isn't actually a new combo,
+//    // but at the moment I can't think of a way of eliminating
+//    InstanceSizeNormalisationFactor.combosFor(3).toSet shouldBe
+//      Set(List("medium", "small"), List("small", "medium"), List("small", "small", "small"))
+//
+//    InstanceSizeNormalisationFactor.combosFor(16).foreach { l =>
+//      println(l)
+//    }
+//  }
 }
