@@ -1,9 +1,10 @@
+import play.api.GlobalSettings
 import play.api.mvc.{Filter, RequestHeader, Result, WithFilters}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object Global extends WithFilters(AccessLog) {
+object Global extends GlobalSettings /* extends WithFilters(AccessLog) */ {
 
 }
 

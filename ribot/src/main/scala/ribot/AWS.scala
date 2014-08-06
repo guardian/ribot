@@ -2,6 +2,7 @@ package ribot
 
 import com.amazonaws.auth.{InstanceProfileCredentialsProvider, SystemPropertiesCredentialsProvider, EnvironmentVariableCredentialsProvider, AWSCredentialsProviderChain}
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
+import com.amazonaws.services.s3.AmazonS3Client
 
 object AWS {
   val credentials =
@@ -12,4 +13,5 @@ object AWS {
       new InstanceProfileCredentialsProvider
     )
 
+  lazy val s3 = new AmazonS3Client(credentials)
 }

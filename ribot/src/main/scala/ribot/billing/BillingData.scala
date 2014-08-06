@@ -51,38 +51,40 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
 
 object BillingData extends ClassLogger {
 
-  private def loadData: BillingData = {
-    // TODO: actually download the file from S3
-    val filename = "/Users/gtackley/billing/smaller.csv.zip"
+  private def loadData(month: Month): BillingData = {
 
-    val rawData = BillingCsvReader
-      .parseZip(new File(filename))
-      .filter(_.isEc2InstanceUsage)
-      .filter(_.availabilityZone != null)
-      // TODO: need to figure out VPS vs Classic
-      .map(_.asUsage(Classic))
-      .toList
+    BillingFileDownloader.billingFileFor(month).map { f =>
+      val rawData = BillingCsvReader
+        .parseZip(f)
+        .filter(_.isEc2InstanceUsage)
+        .filter(_.availabilityZone != null)
+        // TODO: need to figure out VPS vs Classic
+        .map(_.asUsage(Classic))
+        .toList
 
-    BillingData(rawData)
+      BillingData(rawData)
+    } getOrElse {
+      log.warn(s"Could not download billing data for $month")
+      BillingData(Nil)
+    }
   }
 
-  private object Loader extends CacheLoader[String, BillingData] {
-    override def load(key: String) = logAround(s"Loading billing data for $key") {
-      loadData
+  private object Loader extends CacheLoader[Month, BillingData] {
+    override def load(key: Month) = logAround(s"Loading billing data for $key") {
+      loadData(key)
     }
 
     // TODO: implement this so we load async
-    override def reload(key: String, oldValue: BillingData): ListenableFuture[BillingData] =
+    override def reload(key: Month, oldValue: BillingData): ListenableFuture[BillingData] =
       super.reload(key, oldValue)
   }
 
   lazy val cache = CacheBuilder.newBuilder()
     .refreshAfterWrite(60, TimeUnit.MINUTES)
-    .build[String, BillingData](Loader)
+    .build[Month, BillingData](Loader)
 
-  // TODO: the cache should actually be a map from month -> BillingData, and we should be able to get
-  // the last few months
-  def get = cache("this month")
+  // TODO: we should be able to get the last few months
+  def get = cache(Month.thisMonth)
 
   def apply() = get
 
