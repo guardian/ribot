@@ -1,8 +1,12 @@
 package ribot.billing
 
 import java.io.File
+import java.util.concurrent.TimeUnit
 
+import com.google.common.cache.{CacheLoader, CacheBuilder}
+import com.google.common.util.concurrent.ListenableFuture
 import org.joda.time.{DateTimeZone, LocalTime, LocalDate, DateTime}
+import ribot.ClassLogger
 import ribot.model.{Classic, Usage}
 
 import scala.collection.GenSeq
@@ -45,9 +49,10 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
 
 
 
-object BillingData {
+object BillingData extends ClassLogger {
 
   private def loadData: BillingData = {
+    // TODO: actually download the file from S3
     val filename = "/Users/gtackley/billing/smaller.csv.zip"
 
     val rawData = BillingCsvReader
@@ -61,10 +66,23 @@ object BillingData {
     BillingData(rawData)
   }
 
-  // in the future, we should automatically refresh this data every now and again, to keep
-  // up to date with when amazon pushes. So this will become a real method running off a cache
-  // rather than just a lazy val
-  lazy val get = loadData
+  private object Loader extends CacheLoader[String, BillingData] {
+    override def load(key: String) = logAround(s"Loading billing data for $key") {
+      loadData
+    }
+
+    // TODO: implement this so we load async
+    override def reload(key: String, oldValue: BillingData): ListenableFuture[BillingData] =
+      super.reload(key, oldValue)
+  }
+
+  lazy val cache = CacheBuilder.newBuilder()
+    .refreshAfterWrite(60, TimeUnit.MINUTES)
+    .build[String, BillingData](Loader)
+
+  // TODO: the cache should actually be a map from month -> BillingData, and we should be able to get
+  // the last few months
+  def get = cache("this month")
 
   def apply() = get
 

@@ -36,6 +36,10 @@ object RibotBuild extends Build {
         "com.amazonaws" % "aws-java-sdk" % "1.8.5",
         "joda-time" % "joda-time" % "2.3",
 
+        "com.google.guava" % "guava" % "15.0",
+        "com.google.code.findbugs" % "annotations" % "3.0.0",
+        "org.slf4j" % "slf4j-api" % "1.7.6",
+
         "org.joda" % "joda-convert" % "1.6" % "provided",
 
         "org.scalatest" %% "scalatest" % "2.2.0" % "test"
