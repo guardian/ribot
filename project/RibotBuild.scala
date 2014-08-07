@@ -44,6 +44,7 @@ object RibotBuild extends Build {
         "org.slf4j" % "slf4j-api" % "1.7.7",
 
         "org.joda" % "joda-convert" % "1.7" % "provided",
+        "org.slf4j" % "slf4j-simple" % "1.7.7" % "test",
 
         "org.scalatest" %% "scalatest" % "2.2.1" % "test"
       ),

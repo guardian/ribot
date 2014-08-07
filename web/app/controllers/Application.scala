@@ -27,8 +27,8 @@ object Application extends Controller {
 
     val dt = new DataTable()
     dt.addColumn(new ColumnDescription("time", ValueType.DATETIME, "Date"))
-    dt.addColumn(new ColumnDescription("resv", ValueType.NUMBER, "Reserved"))
-    dt.addColumn(new ColumnDescription("ondemand", ValueType.NUMBER, "On Demand"))
+    dt.addColumn(new ColumnDescription("resv", ValueType.NUMBER, "Reserved Usage"))
+    dt.addColumn(new ColumnDescription("ondemand", ValueType.NUMBER, "On Demand Usage"))
 
     import lib.GoogleVisualizationHelpers._
 
