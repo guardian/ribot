@@ -4,6 +4,9 @@ import com.typesafe.sbt.web.SbtWeb
 import sbt.Keys._
 import sbt._
 
+import com.typesafe.sbt.SbtNativePackager._
+import NativePackagerKeys._
+
 object RibotBuild extends Build {
 
   val scalaLibraryVersion = "2.11.2"
@@ -66,7 +69,11 @@ object RibotBuild extends Build {
         "org.webjars" % "bootstrap" % "3.2.0",
         "org.webjars" % "jquery" % "2.1.1",
         "org.webjars" % "rickshaw" % "1.5.0"
-      )
+      ),
+
+      maintainer := "Graham Tackley <graham.tackley@theguardian.com>",
+
+      dockerExposedPorts in Docker := List(9000)
 
     )
 
