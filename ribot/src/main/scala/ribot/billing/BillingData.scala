@@ -85,6 +85,7 @@ object BillingData extends ClassLogger {
 
   // TODO: we should be able to get the last few months
   def get = cache(Month.thisMonth)
+  //def get = cache(Month(7, 2014))
 
   def apply() = get
 

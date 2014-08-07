@@ -2,7 +2,7 @@ package ribot
 
 import java.io.File
 
-import com.typesafe.config.{ConfigException, ConfigFactory, Config}
+import com.typesafe.config.{ConfigException, ConfigFactory}
 
 object Configuration {
   private lazy val configFile = new File(sys.props("user.home"), ".ribot")
