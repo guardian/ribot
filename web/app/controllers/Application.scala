@@ -45,7 +45,9 @@ object Application extends Controller {
   }
 
   def showClass(region: String, instanceClass: String) = Action {
-    val billingData = BillingData().filterBy(_.region == region).filterBy(_.instanceType.instanceClass == instanceClass)
+    val billingData = BillingData()
+      .filterBy(_.region == region)
+      .filterBy(_.instanceType.instanceClass == instanceClass)
 
     val reservationData = ReservationData(region).forClass(instanceClass)
 
