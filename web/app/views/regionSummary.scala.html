@@ -1,4 +1,4 @@
-@(region: String, data: ribot.billing.BillingData)
+@(region: String, data: ribot.billing.BillingData, s:  String)
 
 @import lib.ViewHelpers._
 @snippets.skel(region) {
@@ -10,7 +10,9 @@
 
         <div class="row">
             <div class="col-md-12">
-                some stuff here.
+
+
+               @s
             </div>
         </div>
 

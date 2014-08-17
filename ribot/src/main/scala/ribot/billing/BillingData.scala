@@ -24,6 +24,8 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
 
   case class HourlyUsagePoints(hour: DateTime, reservedPoints: BigDecimal, ondemandPoints: BigDecimal)
 
+  case class UsagePointsPerType(instType : String, reservedPoints: BigDecimal, ondemandPoints: BigDecimal)
+
   lazy val pointsPerHour: List[HourlyUsagePoints] = raw
     .groupBy(_.endDate)
     .map { case (hour, usages) =>
@@ -34,16 +36,27 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
     .toList
     .sortBy(_.hour.getMillis)
 
+  lazy val pointsPerType: List[UsagePointsPerType] = raw
+    .groupBy(_.instanceType)
+    .map { case (instType, usages) =>
+    val reservedPoints = usages.filter(_.wasReserved).map(_.reservationCriteria.points).sum
+    val ondemandPoints = usages.filterNot(_.wasReserved).map(_.reservationCriteria.points).sum
+    UsagePointsPerType(instType.toString, reservedPoints, ondemandPoints)
+   }
+    .toList
+
   // in some cases (e.g. for nav etc) we and to be able to refer to the full set of data
   def global: BillingData = parent.map(_.global).getOrElse(this)
 
   def filterBy(f: Usage => Boolean) = copy(raw filter f, parent = Some(this))
 
+  def forOneHour(filterDateTime: DateTime): BillingData  = filterBy(_.endDate == filterDateTime)
+
   def forOneHourYesterdayEvening: BillingData = {
     val yesterdayAtEightPm = new LocalDate().minusDays(1).toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
     filterBy(_.endDate == yesterdayAtEightPm)
-  }
 
+  }
 
 }
 
