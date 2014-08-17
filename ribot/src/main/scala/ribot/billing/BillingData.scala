@@ -24,7 +24,7 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
 
   case class HourlyUsagePoints(hour: DateTime, reservedPoints: BigDecimal, ondemandPoints: BigDecimal)
 
-  case class UsagePointsPerType(instType : String, reservedPoints: BigDecimal, ondemandPoints: BigDecimal)
+  case class UsagePointsPerType(instType: String, reservedPoints: BigDecimal, ondemandPoints: BigDecimal)
 
   lazy val pointsPerHour: List[HourlyUsagePoints] = raw
     .groupBy(_.endDate)
@@ -60,8 +60,6 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
   }
 
 }
-
-
 
 object BillingData extends ClassLogger {
 
