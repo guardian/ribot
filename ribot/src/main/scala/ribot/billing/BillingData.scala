@@ -44,6 +44,7 @@ case class BillingData(raw: GenSeq[Usage], parent: Option[BillingData] = None) {
     UsagePointsPerType(instType.toString, reservedPoints, ondemandPoints)
    }
     .toList
+    .sortBy(_.instType)
 
   // in some cases (e.g. for nav etc) we and to be able to refer to the full set of data
   def global: BillingData = parent.map(_.global).getOrElse(this)

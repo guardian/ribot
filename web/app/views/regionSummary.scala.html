@@ -4,6 +4,28 @@
 @snippets.skel(region) {
     @snippets.nav(data, Some(region))
 
+
+    <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = new google.visualization.DataTable(
+          @Html(s)
+        );
+
+        var options = {
+          title: 'On Demand and Reserved Points Usage'
+
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('summary_chart'));
+
+        chart.draw(data, options);
+    }
+    </script>
+
+
     <div class="container">
 
         @snippets.instanceClassTabs(region, None, data.instanceClasses)
@@ -11,8 +33,9 @@
         <div class="row">
             <div class="col-md-12">
 
+                <div id="summary_chart" style="height: 500px;">
+                    </div>
 
-               @s
             </div>
         </div>
 

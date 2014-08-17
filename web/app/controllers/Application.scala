@@ -27,17 +27,11 @@ object Application extends Controller {
     dt.addColumn(new ColumnDescription("resv", ValueType.NUMBER, "Reserved Usage"))
     dt.addColumn(new ColumnDescription("ondemand", ValueType.NUMBER, "On Demand Usage"))
 
+    val filterTime = new LocalDate().minusDays(1).toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
 
-
-    val yesterdayAtEightPm = new LocalDate().minusDays(1).toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
-
-    for (h <- billingData.forOneHour(yesterdayAtEightPm).pointsPerType) {
-      dt.buildRow.value(h.instType).value(h.reservedPoints).value(h.ondemandPoints).add()
+    for (h <- billingData.forOneHour(filterTime).pointsPerType) {
+      dt.buildRow.value(h.instType.stripPrefix("InstanceType(").stripSuffix(")").trim).value(h.reservedPoints).value(h.ondemandPoints).add()
     }
-
-
-
-
 
     val s = dt.asJson
 
