@@ -18,6 +18,12 @@ case class ReservationData(region: String, all: GenSeq[Reservation]) {
     all = all.filter(_.criteria.instanceType.instanceClass == instanceClass)
   )
 
+  def forType(instanceClass: String, instanceSize: String) = copy(
+    all = all.filter(_.criteria.instanceType.instanceClass == instanceClass)
+      .filter(_.criteria.instanceType.instanceSize == instanceSize)
+  )
+
+
   def totalPoints = all.map(_.points).sum
 
 }

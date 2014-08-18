@@ -26,11 +26,16 @@ object Application extends Controller {
     dt.addColumn(new ColumnDescription("instanceType", ValueType.TEXT, "Instance Type"))
     dt.addColumn(new ColumnDescription("resv", ValueType.NUMBER, "Reserved Usage"))
     dt.addColumn(new ColumnDescription("ondemand", ValueType.NUMBER, "On Demand Usage"))
+    dt.addColumn(new ColumnDescription("resvPoints", ValueType.NUMBER, "Total Reserved Points"))
 
     val filterTime = new LocalDate().minusDays(1).toDateTime(new LocalTime(20, 0), DateTimeZone.UTC)
 
     for (h <- billingData.forOneHour(filterTime).pointsPerType) {
-      dt.buildRow.value(h.instType.stripPrefix("InstanceType(").stripSuffix(")").trim).value(h.reservedPoints).value(h.ondemandPoints).add()
+      val reservationClass = h.instType.stripPrefix("InstanceType(").stripSuffix(")").trim.substring(0,2)
+      val reservationType = h.instType.stripPrefix("InstanceType(").stripSuffix(")").trim.substring(3)
+      dt.buildRow.value(h.instType.stripPrefix("InstanceType(").stripSuffix(")").trim).value(h.reservedPoints).value(h.ondemandPoints).value(0).add()
+      dt.buildRow.value("").value(0).value(0).value(ReservationData(region).forType(reservationClass, reservationType).totalPoints).add()
+      dt.buildRow.value("").value(0).value(0).value(0).add()
     }
 
     val s = dt.asJson
