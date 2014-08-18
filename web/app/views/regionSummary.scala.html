@@ -16,7 +16,11 @@
 
         var options = {
           title: 'On Demand and Reserved Points Usage',
-          isStacked: true
+          isStacked: true,
+          vAxis: {
+            textStyle:
+             {fontSize: 10}
+            }
         };
 
         var chart = new google.visualization.BarChart(document.getElementById('summary_chart'));
