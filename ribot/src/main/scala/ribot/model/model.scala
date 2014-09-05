@@ -70,6 +70,8 @@ case object VPC extends NetworkClass {
 }
 
 
+
+
 case class Reservation
 (
   criteria: ReservationCriteria,

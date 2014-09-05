@@ -28,14 +28,14 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
        | --reserved-instances-ids ${existingReservations.map(_.reservationId).mkString(" ")} \\
        | --target-configurations \\
        |  $cmdLineTargetConfigs
-     """.stripMargin + " --profile websys"
+     """.stripMargin
 
   def cmdLineTargetConfigs = aggReservations.map(_.awsCliString).mkString(" \\\n  ")
 
   def spend(proposed: ReservationCriteria): ReservationGroup = {
 
     this.copy(
-      proposedReservations =  proposed :: proposedReservations
+      proposedReservations = proposed :: proposedReservations
     )
   }
 
@@ -55,7 +55,7 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
   }
 }
 
-object  ReservationGroup {
+object ReservationGroup {
   def make(all: List[Reservation]): List[ReservationGroup] =
     all.groupBy(_.roundedEndDate)
       .values

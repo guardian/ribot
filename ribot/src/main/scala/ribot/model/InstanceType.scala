@@ -2,9 +2,7 @@ package ribot.model
 
 case class InstanceType(instanceClass: String, instanceSize: String) {
   val name = s"$instanceClass.$instanceSize"
-
   def sizeNormalistionFactor = InstanceSizeNormalisationFactor(instanceSize)
-
 }
 
 object InstanceType {
