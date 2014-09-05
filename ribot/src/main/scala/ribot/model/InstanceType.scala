@@ -20,5 +20,4 @@ object InstanceType {
     "i2",
     "hs1"
   )
-
 }

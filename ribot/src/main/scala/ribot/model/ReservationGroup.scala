@@ -33,7 +33,6 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
   def cmdLineTargetConfigs = aggReservations.map(_.awsCliString).mkString(" \\\n  ")
 
   def spend(proposed: ReservationCriteria): ReservationGroup = {
-
     this.copy(
       proposedReservations = proposed :: proposedReservations
     )
