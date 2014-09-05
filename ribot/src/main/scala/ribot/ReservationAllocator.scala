@@ -26,7 +26,7 @@ object ReservationAllocator {
         }
       }
 
-     possiblyApplyImpl(groups)
-    }
+    possiblyApplyImpl(groups)
+  }
 
 }
