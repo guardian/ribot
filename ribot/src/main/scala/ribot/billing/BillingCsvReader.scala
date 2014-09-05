@@ -12,8 +12,6 @@ import scala.collection.convert.decorateAll._
 object BillingCsvReader extends ClassLogger {
 
   def parseZip(zipFile: File) = {
-
-
     val zip = new ZipFile(zipFile)
     // expect only a single entry in the zip
     val first = zip.entries().asScala.next()
