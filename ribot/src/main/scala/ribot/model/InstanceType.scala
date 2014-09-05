@@ -5,7 +5,6 @@ case class InstanceType(instanceClass: String, instanceSize: String) {
 
   def sizeNormalistionFactor = InstanceSizeNormalisationFactor(instanceSize)
 
-
 }
 
 object InstanceType {
@@ -23,8 +22,5 @@ object InstanceType {
     "i2",
     "hs1"
   )
-
-
-
 
 }

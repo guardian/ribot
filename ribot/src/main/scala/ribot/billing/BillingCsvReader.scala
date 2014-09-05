@@ -20,8 +20,6 @@ object BillingCsvReader extends ClassLogger {
 
     log.info("reading " + first)
 
-
-
     parse(new InputStreamReader(zip.getInputStream(first), "US-ASCII"))
   }
 

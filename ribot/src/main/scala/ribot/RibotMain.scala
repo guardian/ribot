@@ -32,7 +32,6 @@ object RibotMain extends App {
 
   for (regionUsages <- usagesByRegion if regionUsages.region == "eu-west-1") {
 
-
     println(s"*** region: ${regionUsages.region} ***")
 
     val reservations = ReservationData(regionUsages.region)
@@ -45,7 +44,6 @@ object RibotMain extends App {
 
       if (desiredReservations.size + actualReservations.size > 0) {
         println("\n\nINSTANCE CLASS: " + instanceClass)
-
 
         println("usage yesterday: ")
         Usage.prettyPrint(actualUsage)
