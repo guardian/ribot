@@ -28,7 +28,6 @@ case class ReservationData(region: String, all: GenSeq[Reservation]) {
 
 }
 
-
 object ReservationData extends ClassLogger {
   import scala.collection.convert.decorateAll._
 
