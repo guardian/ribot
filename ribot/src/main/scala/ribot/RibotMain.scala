@@ -9,7 +9,7 @@ import ribot.reservations.ReservationData
 
 object RibotMain extends App {
 
-  val filename = "/Users/gtackley/billing/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-07.csv.zip"
+  val filename = "/home/dnanini/git/ribot/data/362307275615-aws-billing-detailed-line-items-with-resources-and-tags-2014-09.csv.zip"
   //val filename = "/Users/gtackley/billing/smaller.csv.zip"
 
   val yesterday = new LocalDate().minusDays(1)
