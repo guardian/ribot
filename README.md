@@ -28,8 +28,8 @@ s3.bucket=gnm-billing
 ##Run
 
 ```
-cd ribot/
-sbt
+$ cd ribot/
+$ sbt
 
 project web
 run
