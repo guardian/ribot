@@ -7,9 +7,14 @@ object ReservationAllocator {
     val unallocated = ReservationCriteria.unaggregate(unallocatedDesiredReservations)
       .sortBy(_.points).reverse
 
-    unallocated.foldLeft(groups) { case (acc, nextDesiredReservation) =>
-      possiblyApply(acc, nextDesiredReservation)
+    val groupsWithPossibleSparePoints = unallocated.foldLeft(groups) {
+      case (acc, nextDesiredReservation) =>
+        possiblyApply(acc, nextDesiredReservation)
     }
+
+    groupsWithPossibleSparePoints
+      .map(groupWithPotentialSparePoint =>
+          groupWithPotentialSparePoint.spendSpare(unallocatedDesiredReservations.last))
   }
 
   def possiblyApply(groups: List[ReservationGroup], r: ReservationCriteria): List[ReservationGroup] = {

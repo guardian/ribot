@@ -38,6 +38,20 @@ case class ReservationGroup(existingReservations: List[Reservation], proposedRes
     )
   }
 
+  def spendSpare(criteria: ReservationCriteria) : ReservationGroup = {
+
+    if(sparePoints > 0){
+      val smallestInClass = SmallestInClass(criteria.instanceClass)
+      val pointsOfSmallest = InstanceSizeNormalisationFactor(smallestInClass)
+      val spareSpend = criteria.copy(
+        instanceType=InstanceType(criteria.instanceClass, smallestInClass), numInstances = sparePoints/pointsOfSmallest
+      )
+      this.copy(
+        proposedReservations = spareSpend :: proposedReservations
+      )
+    }
+    else this
+  }
 }
 
 object ReservationGroup {

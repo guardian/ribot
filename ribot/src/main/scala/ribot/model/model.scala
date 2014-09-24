@@ -3,7 +3,23 @@ package ribot.model
 import com.amazonaws.services.ec2.model.ReservedInstances
 import org.joda.time.{Duration, DateTime}
 
+object SmallestInClass {
 
+  private val smallestTypeInClass = Map(
+    "m1" -> "small",
+    "m2" -> "xlarge",
+    "m3" -> "medium",
+    "c1" -> "medium",
+    "c3" -> "large",
+    "r3" -> "large",
+    "g2" -> "2xlarge",
+    "i2" -> "xlarge",
+    "hs1" -> "8xlarge"
+  ).withDefaultValue("large")
+
+  def apply(instanceClass: String): String = smallestTypeInClass(instanceClass)
+
+}
 
 object InstanceSizeNormalisationFactor {
 
