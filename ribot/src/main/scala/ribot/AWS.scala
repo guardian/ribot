@@ -9,7 +9,7 @@ object AWS {
     new AWSCredentialsProviderChain(
       new EnvironmentVariableCredentialsProvider,
       new SystemPropertiesCredentialsProvider,
-      new ProfileCredentialsProvider("profile billing"),
+      new ProfileCredentialsProvider("billing"),
       new InstanceProfileCredentialsProvider
     )
 

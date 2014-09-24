@@ -13,7 +13,7 @@ object ReservationMain /*extends App*/ {
 
   val regions = List(Regions.EU_WEST_1) map Region.getRegion
 
-  val creds = new ProfileCredentialsProvider("profile billing")
+  val creds = new ProfileCredentialsProvider("billing")
 
   for (region <- regions) {
     val ec2 = region.createClient(classOf[AmazonEC2Client], creds, null)
